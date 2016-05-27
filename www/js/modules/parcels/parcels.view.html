@@ -1,0 +1,24 @@
+<ion-view view-title="Parcels">
+  <ion-content>
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="getParcels()">
+    </ion-refresher>
+    <ion-list>
+      <div ng-hide="hasParcels()" class="parcel-no-data-msg">
+        <p>There is no parcels in your list.</p>
+        <p>You can reload list using pull-to-refresh</p>
+      </div>
+      <ion-item class="parcel-item" ng-repeat="parcel in parcels track by $index" ng-click="showDetails(parcel)">
+        <div class="row top-line">
+          <div class="uuid">{{parcel.uuid}}</div>
+          <div class="date pull-right">{{parcel.date}}</div>
+        </div>
+        <div class="row bottom-line">
+          <span class="statusText">{{parcel.statusText}}</span>
+          <div class="pull-right">
+            <i class="icon ion-chevron-right"></i>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,57 @@
+<ion-view view-title="{{ title }}">
+  <ion-content>
+    <ion-list class="details">
+      <ion-item>
+        <h2>Parcel Details...</h2>
+        <p>{{ parcel.uuid || 'unknown' }}</p>
+        <p>{{ parcel.sender || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Status...</h2>
+        <p>{{ parcel.status || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Label Scanned...</h2>
+        <p>{{ parcel.labelScanned || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Last Seen...</h2>
+        <p>{{ parcel.lastSeen || 'unknown' }}</p>
+        <p>{{ parcel.lastSeenWhere || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Delivery Due...</h2>
+        <p>{{ parcel.devliveryDue || 'unknown' }}</p>
+      </ion-item>
+      <ion-item class="report" ng-show="parcel.report" >
+        <h2>{{ parcel.report }}</h2>
+      </ion-item>
+      <ion-item ng-show="parcel.observation" >
+        <h2 style="color:#ef473a;">Observation...</h2>
+        <p>{{ parcel.observation.text || 'Not Specified' }}</p>
+      </ion-item>
+      <ion-item ng-show="parcel.observation && parcel.observation.pictures && parcel.observation.pictures.length && (parcel.observation.pictures.length > 0)" >
+        <h2 style="color:#ef473a;">Photo...</h2>
+        <div style="width:100%;margin-top:.5em;margin-bottom:1em;">
+          <div ng-repeat="picture in parcel.observation.pictures" style="width:1em;height:1em;font-size:4em;text-align:center;background-color:#888;float:left;margin-right:.2em;margin-top:.2em;">
+            <img style="max-width: 100%;" data-ng-src="{{getBase64Picture(picture.prev)}}" />
+          </div>
+        </div>
+      </ion-item>
+      <ion-item ng-show="parcel.observation && parcel.observation.videos && parcel.observation.videos.length && parcel.observation.videos.length > 0" >
+        <h2 style="color:#ef473a;">Video...</h2>
+        <div style="width:100%;margin-top:.5em;margin-bottom:1em;">
+          <div ng-repeat="video in parcel.observation.videos" ng-click="showVideo(video.prev.fullPath)" style="width:1em;height:1em;font-size:4em;text-align:center;background-color:#888;float:left;margin-right:.2em;margin-top:.2em;">
+            <img style="max-width: 100%;" data-ng-src="{{getBase64Picture(video.prev.thumbnail)}}" />
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <!-- <img data-ng-src="data:image/jpeg;base64,{{parcel.image}}" /> -->
+    <div ng-show="scanned" style="width:100%;text-align:center;">
+      <button ng-click="addObservation()" class="button button-assertive" style="margin:2em auto;width:80%;">
+        <i class="icon ion-compose" style="margin-right:1em;"></i>Add Parcel Observation
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+<ion-view hide-nav-bar="true">
+  <ion-content>
+    <div class="logo-image">
+      <img src="img/dpd-logo.png"/>
+      <p >Enter your DPD User Id</p>
+    </div>
+    <form name="loginForm">
+      <div class="list">
+        <label class="login-label-item item item-input">
+          <span class="input-label" ng-class="{'errorInput': loginForm.username.$dirty && loginForm.username.$invalid}">PDP User ID</span>
+          <input type="text" ng-model="credentials.username"
+            placeholder="Forename.Surname" name="username" required ng-pattern="/^.+\..+$/">
+        </label>
+        <label class="login-label-item item item-input">
+          <span class="input-label" ng-class="{'errorInput': loginForm.password.$dirty && loginForm.password.$invalid}">Password</span>
+          <input type="password" ng-model="credentials.password"
+            placeholder="Password" name="password" required minlength="5">
+        </label>
+      </div>
+    </form>
+    <div class="login-button">
+      <button class="button button-assertive" ng-click="login()" ng-disabled="loginForm.$invalid || isProgress">
+        <span>Log In</span>
+      </button>
+    </div>
+    <div class="login-error-msg">
+      <p>{{ errorMessage }}</p>
+      <p ng-show="loginForm.username.$dirty && loginForm.username.$invalid">User ID should look like "Forename.Surname"</p>
+      <p ng-show="loginForm.password.$dirty && loginForm.password.$invalid">Password is too short</p>
+    </div>
+  </ion-content>
+</ion-view>

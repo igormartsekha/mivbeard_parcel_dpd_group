@@ -1,0 +1,22 @@
+<ion-view view-title="Settings">
+  <ion-content class="setting-div">
+    <ion-list>
+      <ion-item>
+        <h2>Current Location</h2>
+        <p>{{ currentLocation.name }} {{ currentLocation.code }}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar class="setting-bottom-scroll bar-stable">
+    <ion-content>
+      <ion-list >
+        <ion-item ng-repeat="location in locations" ng-click="setCurrent(location)">
+          <p ng-class="{ 'current': isCurrent(location.code), 'regular': !isCurrent(location.code) }">
+            <i class="ion-checkmark-round" ng-show="isCurrent(location.code)"></i>
+            <span>{{ location.name }} ({{ location.code }})</span>
+          </p>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,69 @@
+<ion-view view-title="Parcel Observation">
+  <ion-content>
+    <ion-list class="details observation">
+      <ion-item>
+        <h2>Parcel</h2>
+        <p>{{ parcel.uuid || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Scan Date/Time</h2>
+        <p>{{ parcel.labelScanned || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Location</h2>
+        <p>{{ getLocation().name || 'unknown' }} ({{ getLocation().code }})</p>
+      </ion-item>
+      <ion-item>
+        <h2>Observation</h2>
+        <label class="item item-input">
+          <input type="text" placeholder="Specify item observation here" ng-model="observation.text">
+        </label>
+      </ion-item>
+      <ion-item>
+        <h2>Picture</h2>
+        <div class="observation-picture">
+          <div ng-repeat="picture in pictures" class="observation-picture-item">
+            <div>
+              <div ng-click="removePicture($index)">
+                <i class="icon ion-ios-close"></i>
+              </div>
+            </div>
+
+            <img data-ng-src="{{getBase64Picture(picture.prev)}}" />
+
+          </div>
+          <div class="observation-picture-add"><i class="icon ion-ios-camera" ng-click="addPicture()"></i></div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <h2>Video</h2>
+        <div class="observation-picture">
+          <div ng-repeat="video in videos" ng-click="showVideo(video.prev.fullPath)" class="observation-picture-item">
+              <div>
+                <div ng-click="removeVideo($index)">
+                  <i class="icon ion-ios-close"></i>
+                </div>
+              </div>
+
+            <img data-ng-src="{{getBase64Picture(video.prev.thumbnail)}}" />
+
+          </div>
+          <div class="observation-picture-add"><i class="icon ion-ios-videocam" ng-click="addVideo()"></i></div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <h2>Notify</h2>
+        <p>{{ getUserId() || 'unknown' }}</p>
+      </ion-item>
+      <ion-item>
+        <h2>Location</h2>
+        <div id="googleMap" class="observation-google-map"></div>
+      </ion-item>
+    </ion-list>
+    <div class="observation-submit-button">
+      <button ng-click="submitObservation()" class="button button-assertive">
+        Submit
+      </button>
+    </div>
+  </ion-content>
+</ion-view>
